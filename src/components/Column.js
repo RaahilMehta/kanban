@@ -7,6 +7,9 @@ import doneIcon from "../assets/Done.svg";
 import cancelledIcon from "../assets/Cancelled.svg";
 import inProgressIcon from "../assets/in-progress.svg";
 import todoIcon from "../assets/To-do.svg";
+import highPriorityIcon from "../assets/HighPriority.svg"; // Import high priority icon
+import mediumPriorityIcon from "../assets/MediumPriority.svg"; // Import medium priority icon
+import lowPriorityIcon from "../assets/LowPriority.svg"; // Import low priority icon
 
 const Column = ({ title, tickets }) => {
   const getIcon = (title) => {
@@ -19,6 +22,19 @@ const Column = ({ title, tickets }) => {
         return inProgressIcon;
       case "To Do":
         return todoIcon;
+      default:
+        return null;
+    }
+  };
+
+  const getPriorityIcon = (priority) => {
+    switch (priority) {
+      case "high":
+        return highPriorityIcon;
+      case "medium":
+        return mediumPriorityIcon;
+      case "low":
+        return lowPriorityIcon;
       default:
         return null;
     }
@@ -39,14 +55,18 @@ const Column = ({ title, tickets }) => {
       <div className="column-body">
         {tickets.length > 0 ? (
           tickets.map(ticket => (
-            <Card
-              key={ticket.id}
-              id={ticket.id}
-              title={ticket.title}
-              description={ticket.description}
-              assigneeImage={ticket.assigneeImage}
-              isUrgent={ticket.isUrgent}
-            />
+            <div key={ticket.id} className="ticket">
+              <Card
+                id={ticket.id}
+                title={ticket.title}
+                description={ticket.description}
+                assigneeImage={ticket.assigneeImage}
+                isUrgent={ticket.isUrgent}
+              />
+              {getPriorityIcon(ticket.priority) && (
+                <img src={getPriorityIcon(ticket.priority)} alt={`${ticket.priority} Priority`} className="priority-icon" />
+              )}
+            </div>
           ))
         ) : (
           <p className="no-tickets">No tickets available</p>

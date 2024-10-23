@@ -17,6 +17,14 @@ const Board = ({ tickets, groupBy }) => {
       groups["High"] = tickets.filter(ticket => ticket.priority === "high");
       groups["Medium"] = tickets.filter(ticket => ticket.priority === "medium");
       groups["Low"] = tickets.filter(ticket => ticket.priority === "low");
+    } else if (groupBy === "user") { // Added grouping by user
+      tickets.forEach(ticket => {
+        const user = ticket.assignee; // Assuming ticket has an 'assignee' property
+        if (!groups[user]) {
+          groups[user] = [];
+        }
+        groups[user].push(ticket);
+      });
     }
 
     return groups;

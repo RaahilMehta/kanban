@@ -18,6 +18,11 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
+.priority-icon {
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  margin-left: 0.5rem; /* Space between card and icon */
+}
 
 .column-icons {
   display: flex;

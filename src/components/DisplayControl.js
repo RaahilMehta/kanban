@@ -5,18 +5,21 @@ const DisplayControls = ({ setGroupBy, setSortBy }) => {
   return (
     <div className="display-controls">
       <div className="dropdown">
-        <label>Grouping</label>
-        <select onChange={(e) => setGroupBy(e.target.value)}>
-          <option value="status">Status</option>
-          <option value="user">User</option>
-          <option value="priority">Priority</option>
-        </select>
-      </div>
-      <div className="dropdown">
-        <label>Ordering</label>
-        <select onChange={(e) => setSortBy(e.target.value)}>
-          <option value="priority">Priority</option>
-          <option value="title">Title</option>
+        <label>Grouping and Ordering</label>
+        <select onChange={(e) => {
+          const value = e.target.value;
+          if (value === "user" || value === "priority" || value === "status") {
+            setGroupBy(value);
+          } else {
+            setSortBy(value);
+          }
+        }}>
+          <option value="status">Group by Status</option>
+          <option value="user">Group by User</option>
+          <option value="priority">Group by Priority</option>
+          <option value="prioritySort">Sort by Priority</option>
+          <option value="titleSort">Sort by Title</option>
+          <option value="userSort">Sort by User</option>
         </select>
       </div>
     </div>
